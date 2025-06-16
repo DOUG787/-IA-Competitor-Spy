@@ -30,9 +30,6 @@ streamlit run app.py
 - Diferenciação: Média  
 - Sugestão: Explorar parcerias exclusivas e reforçar branding pós-venda
 
-## 📸 Imagem
-(Adicione aqui uma imagem visual de marca se desejar)
-
 ---
 
 Contribuições são bem-vindas!
