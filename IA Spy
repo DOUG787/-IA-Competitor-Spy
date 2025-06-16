@@ -1,0 +1,22 @@
+import streamlit as st
+from agent import analyze_competitor
+
+st.set_page_config(page_title="IA Competitor Spy", layout="centered")
+
+st.title("🕵️ IA Competitor Spy")
+st.markdown("""
+Insira uma descrição breve da sua empresa/startup e veja uma análise de concorrentes, pontos fortes, fracos e sugestões estratégicas geradas por um agente de IA.
+""")
+
+description = st.text_area("📄 Descrição da Empresa", height=200)
+
+if st.button("Analisar Mercado"):
+    if description.strip():
+        with st.spinner("Espiando os concorrentes..."):
+            result = analyze_competitor(description)
+            st.success("Análise concluída!")
+            st.subheader("📊 Resultados:")
+            for key, value in result.items():
+                st.markdown(f"**{key}:** {value}")
+    else:
+        st.warning("Por favor, insira uma descrição válida.")
