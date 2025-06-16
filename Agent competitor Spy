@@ -1,0 +1,34 @@
+import openai
+import os
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+def analyze_competitor(description):
+    prompt = f"""
+Você é um agente de análise de mercado para startups e empresas. Com base na descrição abaixo, identifique:
+
+1. Concorrentes diretos e indiretos (nomes e segmentos)
+2. Pontos fortes percebidos
+3. Pontos fracos percebidos
+4. Nível de diferenciação (Alta, Média, Baixa)
+5. Sugestões estratégicas para se destacar
+
+Descrição:
+"""{description}"""
+
+Retorne os dados como um dicionário Python.
+"""
+
+    response = openai.ChatCompletion.create(
+        model="gpt-4",
+        messages=[{"role": "user", "content": prompt}],
+        temperature=0.7
+    )
+
+    result_text = response.choices[0].message["content"]
+
+    try:
+        result_dict = eval(result_text, {"__builtins__": {}})
+        return result_dict
+    except Exception as e:
+        return {"Erro": f"Não foi possível interpretar a resposta da IA. Detalhes: {e}"}
